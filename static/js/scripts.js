@@ -23,24 +23,21 @@ function toggleSidebar() {
 
 document.querySelector('.menu-icon').onclick = toggleSidebar;
 
-
 // Function to process Excel file
-document
-  .getElementById("fileInput")
-  .addEventListener("change", function (event) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
+document.getElementById("fileInput").addEventListener("change", function (event) {
+  const file = event.target.files[0];
+  const reader = new FileReader();
 
-    reader.onload = function (event) {
-      const data = new Uint8Array(event.target.result);
-      const workbook = XLSX.read(data, { type: "array" });
-      const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-      const jsonData = XLSX.utils.sheet_to_json(worksheet);
-      processData(jsonData);
-    };
+  reader.onload = function (event) {
+    const data = new Uint8Array(event.target.result);
+    const workbook = XLSX.read(data, { type: "array" });
+    const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+    const jsonData = XLSX.utils.sheet_to_json(worksheet);
+    processData(jsonData);
+  };
 
-    reader.readAsArrayBuffer(file);
-  });
+  reader.readAsArrayBuffer(file);
+});
 
 function processData(data) {
   const studentNames = new Set(data.map((item) => item.Name));
@@ -226,7 +223,7 @@ function updateQualificationsChart(data) {
     .getElementById("qualifications-chart")
     .getContext("2d");
   new Chart(qualificationsCtx, {
-    type: "pie",
+    type: "doughnut",
     data: data,
     options: {
       responsive: true,
@@ -270,7 +267,7 @@ function updateDepartmentChart(labels, data) {
     .getElementById("department-chart")
     .getContext("2d");
   new Chart(departmentCtx, {
-    type: "pie",
+    type: "doughnut",
     data: {
       labels: labels,
       datasets: [
@@ -344,33 +341,31 @@ function getLatLngFromCity(city) {
 }
 
 // Existing button event listener
-document
-  .getElementById("getRecommendationButton")
-  .addEventListener("click", function () {
-    const userName = document.getElementById("userNameInput").value;
-    if (userName) {
-      fetch("/recommend", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ user_name: userName }),
+document.getElementById("getRecommendationButton").addEventListener("click", function () {
+  const userName = document.getElementById("userNameInput").value;
+  if (userName) {
+    fetch("/recommend", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ user_name: userName }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.error) {
+          alert(data.error);
+        } else {
+          displayRecommendations([data.course_title]);
+        }
       })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.error) {
-            alert(data.error);
-          } else {
-            displayRecommendations([data.course_title]);
-          }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-    } else {
-      alert("Please enter a user name.");
-    }
-  });
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  } else {
+    alert("Please enter a user name.");
+  }
+});
 
 function displayRecommendations(recommendations) {
   const recommendationResult = document.getElementById("recommendationResult");
