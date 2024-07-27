@@ -1,3 +1,5 @@
+// script.js
+
 // SIDEBAR TOGGLE
 let sidebarOpen = false;
 const sidebar = document.getElementById('sidebar');
@@ -14,6 +16,10 @@ function closeSidebar() {
     sidebar.classList.remove('sidebar-responsive');
     sidebarOpen = false;
   }
+}
+
+function toggleSidebar() {
+  sidebarOpen ? closeSidebar() : openSidebar();
 }
 
 // Function to process Excel file
@@ -116,10 +122,7 @@ function processData(data) {
 }
 
 function abbreviateLabel(label) {
-  if (label.length > 10) { // Adjust length as needed
-    return label.slice(0, 10) + '...'; // Truncate and add ellipsis
-  }
-  return label;
+  return label.length > 10 ? label.slice(0, 10) + '...' : label;
 }
 
 function updateBarChart(topCourses, topCourseCounts) {
@@ -193,11 +196,10 @@ function updatePieChart(data) {
 function updateQualificationsChart(data) {
   const qualificationsCtx = document.getElementById('qualifications-chart').getContext('2d');
   new Chart(qualificationsCtx, {
-    type: 'bar',
+    type: 'pie',
     data: data,
     options: {
       responsive: true,
-      maintainAspectRatio: false,
       plugins: {
         legend: {
           position: 'top',
@@ -224,7 +226,7 @@ function updateStudentFacultyChart(data) {
         },
         title: {
           display: true,
-          text: 'Student vs Faculty Ratio'
+          text: 'Student vs Faculty'
         }
       }
     }
@@ -234,13 +236,13 @@ function updateStudentFacultyChart(data) {
 function updateDepartmentChart(labels, data) {
   const departmentCtx = document.getElementById('department-chart').getContext('2d');
   new Chart(departmentCtx, {
-    type: 'doughnut',
+    type: 'pie',
     data: {
       labels: labels,
       datasets: [{
         label: 'Departments',
         data: data,
-        backgroundColor: ['#2962ff', '#d50000', '#2e7d32', '#ff6d00', '#583cb3'],
+        backgroundColor: ['#2962ff', '#d50000', '#2e7d32', '#ff6d00', '#583cb3', '#9e9e9e'],
       }]
     },
     options: {
@@ -251,13 +253,14 @@ function updateDepartmentChart(labels, data) {
         },
         title: {
           display: true,
-          text: 'Count of Users by Department'
+          text: 'Top Departments'
         }
       }
     }
   });
 }
 
+// Existing map function
 function updateMap(data) {
   const cityCounts = data.reduce((acc, curr) => {
     acc[curr.City] = (acc[curr.City] || 0) + 1;
@@ -293,4 +296,37 @@ function getLatLngFromCity(city) {
   };
 
   return cities[city] || null;
+}
+
+// Existing button event listener
+document.getElementById('getRecommendationButton').addEventListener('click', function() {
+  const userName = document.getElementById('userNameInput').value;
+  if (userName) {
+    fetch('/recommend', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ user_name: userName })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.error) {
+        alert(data.error);
+      } else {
+        displayRecommendations([data.course_title]);
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  } else {
+    alert('Please enter a user name.');
+  }
+});
+
+function displayRecommendations(recommendations) {
+  const recommendationResult = document.getElementById('recommendationResult');
+  recommendationResult.innerHTML = '<h3>Recommended Courses:</h3><ul>' +
+    recommendations.map(course => `<li>${course}</li>`).join('') + '</ul>';
 }
