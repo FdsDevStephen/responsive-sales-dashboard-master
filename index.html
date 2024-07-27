@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+</head>
+
+<body>
+  <div class="grid-container">
+    <header class="header">
+      <div class="menu-icon" onclick="openSidebar()">
+        <span class="material-icons-outlined">menu</span>
+      </div>
+      <div class="header-left">
+        <h1>Course Dashboard</h1>
+      </div>
+      <div class="header-right">
+        <span class="material-icons-outlined">notifications</span>
+        <span class="material-icons-outlined">email</span>
+        <span class="material-icons-outlined">account_circle</span>
+      </div>
+    </header>
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-title">
+        <div class="sidebar-brand">
+          <span class="material-icons-outlined">shopping_cart</span> STORE
+        </div>
+        <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
+      </div>
+      <ul class="sidebar-list">
+        <li class="sidebar-list-item"><a href="#" target="_blank"><span class="material-icons-outlined">dashboard</span>
+            Dashboard</a></li>
+        <li class="sidebar-list-item"><a href="#" target="_blank"><span class="material-icons-outlined">category</span>
+            Categories</a></li>
+        <li class="sidebar-list-item"><a href="#" target="_blank"><span class="material-icons-outlined">groups</span>
+            Customers</a></li>
+        <li class="sidebar-list-item"><a href="#" target="_blank"><span
+              class="material-icons-outlined">fact_check</span> Inventory</a></li>
+        <li class="sidebar-list-item"><input type="file" id="fileInput" accept=".xlsx" style="margin-top: 20px;"></li>
+      </ul>
+    </aside>
+    <main class="main-container">
+      <div class="main-title">
+        <h2>DASHBOARD</h2>
+      </div>
+      <div class="main-cards">
+        <div class="card">
+          <div class="card-inner">
+            <h3>Total No. of Students</h3><span class="material-icons-outlined">groups</span>
+          </div>
+          <h1 id="total-students">0</h1>
+        </div>
+        <div class="card">
+          <div class="card-inner">
+            <h3>Total No. of Courses</h3><span class="material-icons-outlined">category</span>
+          </div>
+          <h1 id="total-courses">0</h1>
+        </div>
+      </div>
+      <div class="charts">
+        <div class="charts-card">
+          <h2 class="chart-title">Courses with More Than 100 Registrations</h2>
+          <canvas id="bar-chart" style="height: 100%;"></canvas>
+        </div>
+        <div class="charts-card">
+          <h2 class="chart-title">Gender Distribution</h2>
+          <canvas id="pie-chart"></canvas>
+        </div>
+        <div class="charts-card">
+          <h2 class="chart-title">Qualifications Distribution</h2>
+          <canvas id="qualifications-chart"></canvas>
+        </div>
+        <div class="charts-card">
+          <h2 class="chart-title">Student vs Faculty Ratio</h2>
+          <canvas id="student-faculty-chart"></canvas>
+        </div>
+        <div class="charts-card">
+          <h2 class="chart-title">Count of Users by Department</h2>
+          <canvas id="department-chart"></canvas>
+        </div>
+        <div class="charts-card">
+          <h2 class="chart-title">Students by City</h2>
+          <div id="map" style="height: 400px;"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+  <script src="js/scripts.js"></script>
+</body>
+
+</html>
