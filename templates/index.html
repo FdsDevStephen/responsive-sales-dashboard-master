@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Dashboard</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
@@ -36,10 +37,14 @@
         <span class="material-icons-outlined close-btn" onclick="closeSidebar()">close</span>
       </div>
       <ul class="sidebar-list">
-        <li class="sidebar-list-item"><a href="#" target="_blank"><span class="material-icons-outlined">dashboard</span> Dashboard</a></li>
-        <li class="sidebar-list-item"><a href="#" target="_blank"><span class="material-icons-outlined">category</span> Categories</a></li>
-        <li class="sidebar-list-item"><a href="#" target="_blank"><span class="material-icons-outlined">groups</span> Customers</a></li>
-        <li class="sidebar-list-item"><a href="#" target="_blank"><span class="material-icons-outlined">fact_check</span> Inventory</a></li>
+        <li class="sidebar-list-item"><a href="#" target="_blank"><span class="material-icons-outlined">dashboard</span>
+            Dashboard</a></li>
+        <li class="sidebar-list-item"><a href="#" target="_blank"><span class="material-icons-outlined">category</span>
+            Categories</a></li>
+        <li class="sidebar-list-item"><a href="#" target="_blank"><span class="material-icons-outlined">groups</span>
+            Customers</a></li>
+        <li class="sidebar-list-item"><a href="#" target="_blank"><span
+              class="material-icons-outlined">fact_check</span> Inventory</a></li>
         <li class="sidebar-list-item"><input type="file" id="fileInput" accept=".xlsx" style="margin-top: 20px;"></li>
       </ul>
     </aside>
@@ -63,7 +68,7 @@
       </div>
       <div class="charts">
         <div class="charts-card">
-          <h2 class="chart-title">Registration Per Couse</h2>
+          <h2 class="chart-title">Registration Per Course</h2>
           <canvas id="bar-chart" style="height: 100%;"></canvas>
         </div>
         <div class="charts-card">
