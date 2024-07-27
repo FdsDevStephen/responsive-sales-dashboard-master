@@ -336,6 +336,8 @@ function getLatLngFromCity(city) {
   const cities = {
     Mangalore: [12.9141, 74.856],
     Puttur: [12.7586, 75.2072],
+    Mumbai: [19.076, 72.8777],
+    Delhi: [28.7041, 77.1025],
     OtherCity1: [11.1111, 76.1111],
     OtherCity2: [22.2222, 77.2222],
   };
@@ -378,68 +380,69 @@ function displayRecommendations(recommendations) {
     "</ul>";
 }
 
+// Line chart for enrollments over time
 const ctx = document.getElementById('line-chart').getContext('2d');
-        const lineChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: [],
-                datasets: [{ 
-                    data: [],
-                    label: "Enrollments",
-                    borderColor: "#3e95cd",
-                    fill: false
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false, // Allow the chart to fill the container
-                plugins: {
-                    title: {
-                        display: true,
-                        text: 'Enrollment Over Time'
-                    }
-                },
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Timeline'
-                        }
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Number of Enrollments'
-                        }
-                    }
-                }
-            }
-        });
-
-        // Function to update chart data
-        function updateChartData(newData) {
-            const labels = Object.keys(newData);
-            const data = Object.values(newData);
-
-            lineChart.data.labels = labels;
-            lineChart.data.datasets[0].data = data;
-            lineChart.update();
+const lineChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: [],
+    datasets: [{ 
+      data: [],
+      label: "Enrollments",
+      borderColor: "#3e95cd",
+      fill: false
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false, // Allow the chart to fill the container
+    plugins: {
+      title: {
+        display: true,
+        text: 'Enrollment Over Time'
+      }
+    },
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Timeline'
         }
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Number of Enrollments'
+        }
+      }
+    }
+  }
+});
 
-        // Example new data
-        const newTimelineData = {
-            "Jan-April 2019": 82,
-            "Jan-April 2020": 63,
-            "Jan-April 2021": 204,
-            "Jan-April 2022": 48,
-            "Jan-April 2023": 136,
-            "Jul-Dec 2020": 254,
-            "Jul-Dec 2021": 26,
-            "Jul-Dec 2022": 72,
-            "Jul-Dec 2023": 28,
-            "Jul-Dec 2024": 99,
-            "Jan-April 2024": 120 // New data
-        };
+// Function to update chart data
+function updateChartData(newData) {
+  const labels = Object.keys(newData);
+  const data = Object.values(newData);
 
-        // Update chart with new data
-        updateChartData(newTimelineData);
+  lineChart.data.labels = labels;
+  lineChart.data.datasets[0].data = data;
+  lineChart.update();
+}
+
+// Example new data
+const newTimelineData = {
+  "Jan-April 2019": 82,
+  "Jan-April 2020": 63,
+  "Jan-April 2021": 204,
+  "Jan-April 2022": 48,
+  "Jan-April 2023": 136,
+  "Jul-Dec 2020": 254,
+  "Jul-Dec 2021": 26,
+  "Jul-Dec 2022": 72,
+  "Jul-Dec 2023": 28,
+  "Jul-Dec 2024": 99,
+  "Jan-April 2024": 120 // New data
+};
+
+// Update chart with new data
+updateChartData(newTimelineData);
