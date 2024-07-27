@@ -32,7 +32,7 @@
     <aside id="sidebar" class="sidebar">
       <div class="sidebar-title">
         <div class="sidebar-brand">
-          <span class="material-icons-outlined">shopping_cart</span> STORE
+          <span class="material-icons-outlined"></span> ADMIN
         </div>
         <span class="material-icons-outlined close-btn" onclick="closeSidebar()">close</span>
       </div>
@@ -43,8 +43,6 @@
             Categories</a></li>
         <li class="sidebar-list-item"><a href="#" target="_blank"><span class="material-icons-outlined">groups</span>
             Customers</a></li>
-        <li class="sidebar-list-item"><a href="#" target="_blank"><span
-              class="material-icons-outlined">fact_check</span> Inventory</a></li>
         <li class="sidebar-list-item"><input type="file" id="fileInput" accept=".xlsx" style="margin-top: 20px;"></li>
       </ul>
     </aside>
@@ -87,6 +85,14 @@
           <h2 class="chart-title">Count of Users by Department</h2>
           <canvas id="department-chart"></canvas>
         </div>
+
+        <div class="charts-card">
+          <h2 class="chart-title">Enrollment Over Time</h2>
+          <canvas id="line-chart" width="800" height="450"></canvas>
+        </div>
+
+        
+
         <div class="charts-card">
           <h2 class="chart-title">Students by City</h2>
           <div id="map" style="height: 400px;"></div>
