@@ -380,7 +380,6 @@ function displayRecommendations(recommendations) {
     "</ul>";
 }
 
-// Line chart for enrollments over time
 const ctx = document.getElementById('line-chart').getContext('2d');
 const lineChart = new Chart(ctx, {
   type: 'line',
