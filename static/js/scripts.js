@@ -394,7 +394,7 @@ const lineChart = new Chart(ctx, {
   },
   options: {
     responsive: true,
-    maintainAspectRatio: false, // Allow the chart to fill the container
+    maintainAspectRatio: false,
     plugins: {
       title: {
         display: true,
