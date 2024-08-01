@@ -330,8 +330,7 @@ function updateMap(data) {
   map.addLayer(markers);
 }
 
-// Placeholder function to get latitude and longitude from a city name.
-// Replace with actual geocoding if needed.
+
 function getLatLngFromCity(city) {
   const cities = {
     Mangalore: [12.9141, 74.856],
@@ -361,7 +360,7 @@ document.getElementById("getRecommendationButton").addEventListener("click", fun
         if (data.error) {
           alert(data.error);
         } else {
-          displayRecommendations([data.course_title]);
+          displayRecommendations(data.registered_course, data.recommendations);
         }
       })
       .catch((error) => {
@@ -372,11 +371,12 @@ document.getElementById("getRecommendationButton").addEventListener("click", fun
   }
 });
 
-function displayRecommendations(recommendations) {
+function displayRecommendations(registeredCourse, recommendations) {
   const recommendationResult = document.getElementById("recommendationResult");
   recommendationResult.innerHTML =
+    `<h3>Registered Course:</h3><p>${registeredCourse}</p>` +
     "<h3>Recommended Courses:</h3><ul>" +
-    recommendations.map((course) => `<li>${course}</li>`).join("") +
+    recommendations.map((course) => `<li>${course.cn} - Similarity Score: ${course.similarity_score.toFixed(2)}</li>`).join("") +
     "</ul>";
 }
 
